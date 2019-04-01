@@ -134,6 +134,6 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
-RUN apk add --no-cache uwsgi-python3 supervisor postgresql-client
+RUN apk add --no-cache uwsgi-python3 supervisor nodejs nodejs-npm postgresql-dev postgresql-client
 
 CMD ["python3"]
