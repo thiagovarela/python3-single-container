@@ -122,8 +122,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
 	)" \
 	&& apk add --no-cache --virtual .nginx-rundeps $runDeps \
-	&& apk del .build-deps \
-	&& apk del .gettext \
+	&& apk del .build-deps \	
 	&& mv /tmp/envsubst /usr/local/bin/ \
 	\
 	# Bring in tzdata so users could set the timezones through the environment
