@@ -122,7 +122,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 			| awk 'system("[ -e /usr/local/lib/" $1 " ]") == 0 { next } { print "so:" $1 }' \
 	)" \
 	&& apk add --no-cache --virtual .nginx-rundeps $runDeps \
-	&& apk del .build-deps \	
+	&& apk del .build-deps \
 	&& mv /tmp/envsubst /usr/local/bin/ \
 	\
 	# Bring in tzdata so users could set the timezones through the environment
@@ -133,7 +133,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
-RUN apk add --no-cache uwsgi-python3 supervisor nodejs nodejs-npm postgresql-client
-RUN apk add --virtual .build-deps gcc musl-dev postgresql-dev && python3 -m pip install psycopg2 && apk --purge del .build-deps
+RUN apk add --no-cache supervisor nodejs nodejs-npm
+RUN apk add --virtual .build-deps gcc musl-dev linux-headers postgresql-dev && python3 -m pip install uwsgi==2.0.18 psycopg2 && apk --purge del .build-deps
 
 CMD ["python3"]
